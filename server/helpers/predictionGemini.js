@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const gemini = async (phone1, phone2) => {
+const predictionGemini = async () => {
     // Access your API key as an environment variable (see "Set up your API key" above)
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
@@ -9,7 +9,7 @@ const gemini = async (phone1, phone2) => {
     const prompt = "Write a story about an AI and magic"
       
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response = result.response;
     const text = response.text();
     console.log(text);
 }

@@ -20,9 +20,7 @@ class MatchController {
                 }
             });
 
-            res.status(200).json({
-                data
-            });
+            res.status(200).json(data);
         } catch (error) {
             next(error)
         }
@@ -33,7 +31,7 @@ class MatchController {
             const {matchId} = req.params;
 
 
-            const { dataMatches } = await apiFootballInstance({
+            const { data } = await apiFootballInstance({
                 url: `/fixtures`,
                 method: `GET`,
                 params: {
@@ -45,9 +43,7 @@ class MatchController {
                 }
             });
 
-            res.status(200).json({
-                dataMatches
-            })
+            res.status(200).json(data)
         } catch (error) {
             next(error)
         }

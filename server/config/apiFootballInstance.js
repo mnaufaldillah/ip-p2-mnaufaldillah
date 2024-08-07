@@ -1,4 +1,4 @@
-const axios = require(`axios`)
+const axios = require(`axios`);
 
 const apiFootballInstance = axios.create({
     baseURL: 'https://api-football-v1.p.rapidapi.com/v3'

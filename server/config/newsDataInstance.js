@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require(`axios`);
 
 const newsDataInstance = axios.create({
     baseURL: 'https://newsdata.io/api/1'
