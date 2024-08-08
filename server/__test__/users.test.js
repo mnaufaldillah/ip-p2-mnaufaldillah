@@ -163,3 +163,39 @@ describe(`POST /login`, () => {
         })
     })
 })
+
+describe(`PATCH /user-upload`, () => {
+    describe(`Success`, () => {
+        test(`Success 200`, async () => {
+            const response = await request(app)
+                .post(`/user-upload`)
+                .attach('image', './files/OIG1.jpg')
+                .set(`Authorization`, `Bearer ${token}`);
+
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty(`message`, `User Image success to update`);
+        })
+    })
+
+    describe(`Failed`, () => {
+        test(`Failed 400, No Image Attched`, async () => {
+            const response = await request(app)
+                .post(`/user-upload`)
+                .attach('image', '')
+                .set(`Authorization`, `Bearer ${token}`);
+
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty(`message`, `Cannot read properties of undefined (reading 'buffer')`);
+        })
+
+
+        test(`Failed 401, Unauthenticated No Token`, async () => {
+            const response = await request(app)
+                .post(`/user-upload`)
+                .attach('image', './files/OIG1.jpg')
+
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty(`message`, `Unauthenticated`);
+        })
+    })
+})

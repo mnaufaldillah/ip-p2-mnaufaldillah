@@ -97,7 +97,7 @@ class BookmarkController {
 
             res.status(200).json({ message: `Bookmark Success to Delete`})
         } catch (error) {
-            console.log(error, `<-------- Eror Deelete`);
+            // console.log(error, `<-------- Eror Deelete`);
             next(error)
         }
     }
