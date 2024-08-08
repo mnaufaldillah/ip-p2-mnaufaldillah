@@ -27,28 +27,42 @@ class BookmarkController {
             });
 
             let arrBookmarks = [];
-            arrBookmarks = Bookmarks.map((item, index) => {
-                if(index > 50) {
-                    return true;
+            // arrBookmarks = Bookmarks.map((item, index) => {
+            //     if(index > 50) {
+            //         break;
+            //     }
+
+            //     arrBookmarks.push(item.ArticleId);
+            // });
+
+            for(let i = 0; i < Bookmarks.length; i++) {
+                if(i > 50) {
+                    break;
                 }
 
-                arrBookmarks.push(item.ArticleId);
-                return false
-            });
+                arrBookmarks.push(Bookmarks[i].ArticleId);
+            }
 
             arrBookmarks = arrBookmarks.join(`,`);
 
-            const { data } = await newsDataInstance({
+            let options = {
                 url: `/latest`,
                 method: `GET`,
                 params: {
                     apikey: process.env.NEWSDATA_IO_API_KEY,
-                    id: `${arrBookmarks}`
                 }
-            });
+            }
+
+            if(arrBookmarks) {
+                options.params.id = arrBookmarks
+            }
+
+            const { data } = await newsDataInstance(options);
 
             res.status(200).json(data);
         } catch (error) {
+            // console.log(error, `<-------- Eror`);
+            
             next(error)
         }
     }
@@ -83,6 +97,7 @@ class BookmarkController {
 
             res.status(200).json({ message: `Bookmark Success to Delete`})
         } catch (error) {
+            console.log(error, `<-------- Eror Deelete`);
             next(error)
         }
     }

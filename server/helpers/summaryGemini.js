@@ -14,7 +14,7 @@ const summaryGemini = async (articleLink) => {
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
-    console.log(text);
+    // console.log(text);
 
     // text = JSON.parse(text);
 
