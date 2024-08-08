@@ -26,6 +26,8 @@ function FormLogin() {
                         }
                     });
         
+                    localStorage.setItem(`fullName`, data.fullName);
+                    localStorage.setItem(`imageUrl`, data.imageUrl);
                     localStorage.setItem(`access_token`, data.access_token)
         
                     navigate(`/`);

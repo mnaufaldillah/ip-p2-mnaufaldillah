@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ArticleList from '../pages/ArticleList';
 import ArticleDetail from '../pages/ArticleDetail';
+import UploadImage from '../pages/UploadImage';
 
 const router = createBrowserRouter([
     {
@@ -38,9 +39,13 @@ const router = createBrowserRouter([
                 element: <ArticleList />
             },
             {
-                path: `/article/:ArticleId`,
+                path: `article/:ArticleId`,
                 element: <ArticleDetail />
 
+            },
+            {
+                path: 'user-upload',
+                element: <UploadImage />
             }
         ]
     }

@@ -4,15 +4,18 @@ import Header from "../components/header/Header";
 import { fetchArticleDetailyById } from "../app/articleDetailSlice";
 import { useParams } from "react-router-dom";
 import CardArticleDetail from "../components/card/CardArticleDetail";
+import { fetchBookmarksForUser } from "../app/bookmarkListSlice";
 
 function ArticleDetail() {
     const article = useSelector((state) => state.articleDetail.value);
     const loading = useSelector((state) => state.articleDetail.loading);
+    const bookmarks = useSelector((state) => state.bookmarkList.userBookmark);
     const dispatch = useDispatch();
     const { ArticleId } = useParams();
 
     useEffect(() => {
         dispatch(fetchArticleDetailyById(ArticleId));
+        dispatch(fetchBookmarksForUser());
     }, []);
 
     if (loading) {
@@ -20,6 +23,9 @@ function ArticleDetail() {
             <h1>Loading...</h1>
         )
     }
+
+    // console.log(bookmarks);
+    
 
     // console.log(article, `<------------- Article detail`);
     
@@ -34,7 +40,7 @@ function ArticleDetail() {
                 </div>
 
                 <div className="row p-3">
-                    <CardArticleDetail dataDetail={article} />
+                    <CardArticleDetail dataDetail={article} userBookmark={bookmarks} />
                 </div>
             </div>
         </div>

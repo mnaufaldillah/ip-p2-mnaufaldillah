@@ -43,13 +43,17 @@ function Navbar() {
                                 data-bs-toggle="dropdown" 
                                 aria-expanded="false"
                             >
-                                User
+                                User - {localStorage.fullName}
                             </button>
-
                             <ul className="dropdown-menu">
                                 <li>
                                     <Link to='/bookmark' className="nav-link">
                                         Bookmark
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to='/user-upload' className="nav-link">
+                                        Upload Image
                                     </Link>
                                 </li>
                                 <li>
@@ -58,6 +62,9 @@ function Navbar() {
                                     </button>
                                 </li>
                             </ul>
+                        </li>
+                        <li className="nav-item">
+                            <img src={localStorage.imageUrl} alt="" width={50} height={50}/>
                         </li>
                     </ul>
                 </div>

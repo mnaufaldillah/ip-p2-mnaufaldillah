@@ -1,7 +1,37 @@
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addBookmark, deleteBookmark } from '../../app/bookmarkListSlice';
 
-function CardArticleDetail({dataDetail}) {
+function CardArticleDetail({dataDetail, userBookmark}) {
     // console.log(dataDetail, `<--------------- Data Detail`);
+    const dispatch = useDispatch();
+
+    function handlerAddBookmark() {
+        dispatch(addBookmark(dataDetail.articleId));
+    }
+
+    function handlerDeleteBookmark() {
+        dispatch(deleteBookmark(dataDetail.articleId));
+    }
+
+    function renderBookmarkButton() {
+
+        for (const item of userBookmark) {
+            if(item.ArticleId === dataDetail.articleId) {
+                return (
+                    <button onClick={handlerDeleteBookmark}  className="btn btn-outline-danger btn-sm" key={dataDetail.articleId}>
+                        Delete Bookmark
+                    </button>
+                )
+            }
+        }
+
+        return (
+            <button onClick={handlerAddBookmark} className="btn btn-primary btn-sm">
+                Bookmark This
+            </button>
+        )
+    }
     
     return (
         <div className="mb-3">
@@ -19,7 +49,7 @@ function CardArticleDetail({dataDetail}) {
                     <br />
                     <p>Summary By Gemini AI</p>
 
-                    <button className="btn btn-primary btn-sm">Bookmark This</button>
+                    {renderBookmarkButton()}
                 </div>
             </div>
         </div>
@@ -27,7 +57,8 @@ function CardArticleDetail({dataDetail}) {
 }
 
 CardArticleDetail.propTypes ={
-    dataDetail: PropTypes.object
+    dataDetail: PropTypes.object,
+    userBookmark: PropTypes.array
 }
 
 export default CardArticleDetail;

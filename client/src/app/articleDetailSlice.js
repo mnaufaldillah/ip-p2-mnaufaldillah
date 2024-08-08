@@ -37,7 +37,7 @@ export const fetchArticleDetailyById = function (ArticleId) {
                 }
             });
 
-            console.log(data);
+            // console.log(data);
             
 
             dispatch(setArticle(data))
