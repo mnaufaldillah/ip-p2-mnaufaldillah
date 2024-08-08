@@ -200,14 +200,15 @@ class UserController {
             }, {
                 where: {
                     id: req.user
-                }
+                },
+                returning: true
             });
 
             const uploadedImage = editedUser.imageUrl
 
             res.status(200).json({ message: `User Image success to update`, uploadedImage })
         } catch (error) {
-            console.log(error);
+            console.log(error, `<------------- ketemu error`);
             
             next(error)
         }

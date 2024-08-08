@@ -25,8 +25,6 @@ beforeAll(async () => {
         dataBookmark = JSON.parse(dataBookmark);
         dataBookmark = dataBookmark.map((item) => {
             delete item.id;
-            item.password = hashPassword(item.password);
-            item.imageUrl = '';
             item.createdAt = new Date();
             item.updatedAt = new Date();
             return item;
@@ -93,6 +91,29 @@ describe(`POST /bookmarks`, () => {
                 .send({ 
                     ArticleId: `a41643bf6173243d166d108743e9acb3`
                 })
+
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty(`message`, `Unauthenticated`);
+        })
+    })
+})
+
+describe(`GET /bookmarks/user`, () => {
+    describe(`Success`, () => {
+        test(`Success 200`, async () => {
+            const response = await request(app)
+                .get(`/bookmarks/user`)
+                .set(`Authorization`, `Bearer ${token}`);
+
+            expect(response.body).toBeInstanceOf(Array);
+            expect(response.body[0]).toHaveProperty(`id`, expect.any(Number));
+        })
+    })
+
+    describe(`Failed`, () => {
+        test(`Failed 401, Unauthenticated No Token`, async () => {
+            const response = await request(app)
+                .get(`/bookmarks/user`)
 
             expect(response.body).toBeInstanceOf(Object);
             expect(response.body).toHaveProperty(`message`, `Unauthenticated`);

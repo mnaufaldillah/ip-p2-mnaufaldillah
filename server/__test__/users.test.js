@@ -168,9 +168,12 @@ describe(`PATCH /user-upload`, () => {
     describe(`Success`, () => {
         test(`Success 200`, async () => {
             const response = await request(app)
-                .post(`/user-upload`)
+                .patch(`/user-upload`)
                 .attach('image', './files/OIG1.jpg')
                 .set(`Authorization`, `Bearer ${token}`);
+
+            console.log(response.body, `<-------------response body`);
+            
 
             expect(response.body).toBeInstanceOf(Object);
             expect(response.body).toHaveProperty(`message`, `User Image success to update`);
@@ -180,7 +183,7 @@ describe(`PATCH /user-upload`, () => {
     describe(`Failed`, () => {
         test(`Failed 400, No Image Attched`, async () => {
             const response = await request(app)
-                .post(`/user-upload`)
+                .patch(`/user-upload`)
                 .attach('image', '')
                 .set(`Authorization`, `Bearer ${token}`);
 
@@ -191,7 +194,7 @@ describe(`PATCH /user-upload`, () => {
 
         test(`Failed 401, Unauthenticated No Token`, async () => {
             const response = await request(app)
-                .post(`/user-upload`)
+                .patch(`/user-upload`)
                 .attach('image', './files/OIG1.jpg')
 
             expect(response.body).toBeInstanceOf(Object);
