@@ -4,6 +4,7 @@ const { signToken } = require(`../helpers/jwt.js`);
 const { OAuth2Client } = require(`google-auth-library`);
 const { where } = require("sequelize");
 const cloudinary = require(`cloudinary`).v2;
+const nodemailer = require("nodemailer");
 
 class UserController {
     static async registerUser(req, res, next) {
@@ -16,12 +17,45 @@ class UserController {
                 password
             });
 
+            const html = `
+                <h1>Hello, Welcome to World Wide of Football News</h1>
+                <p>Thank you to sign up for our news website</p>
+            `
+
+            const transporter = nodemailer.createTransport({
+                service: "Gmail",
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: "rcarr9645@gmail.com",
+                    pass: process.env.GOOGLE_EMAIL_PASSWORD
+                },
+            });
+
+            const mailOptions = {
+                from: "rcarr9645@gmail.com",
+                to: email,
+                subject: "Welcome to World Wide of Football News",
+                html
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  console.error("Error sending email: ", error);
+                } else {
+                  console.log("Email sent: ", info.response);
+                }
+            });
+
             res.status(201).json({
                 id: newUser.id,
                 fullName: newUser.fullName,
                 email: newUser.email,
             })
         } catch (error) {
+            console.log(error, `<----------------`);
+            
             next(error)
         }
     }
@@ -98,6 +132,37 @@ class UserController {
                     throw { name: `EmailAlreadyRegisteredNonGoogle`, message: `Email is already registered`}
                 }
             };
+
+            const html = `
+                <h1>Hello, Welcome to World Wide of Football News</h1>
+                <p>Thank you to sign up for our news website</p>
+            `
+
+            const transporter = nodemailer.createTransport({
+                service: "Gmail",
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: "rcarr9645@gmail.com",
+                    pass: process.env.GOOGLE_EMAIL_PASSWORD
+                },
+            });
+
+            const mailOptions = {
+                from: "rcarr9645@gmail.com",
+                to: email,
+                subject: "Welcome to World Wide of Football News",
+                html
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  console.error("Error sending email: ", error);
+                } else {
+                  console.log("Email sent: ", info.response);
+                }
+            });
 
             const access_token = signToken({id: user.id});
 
