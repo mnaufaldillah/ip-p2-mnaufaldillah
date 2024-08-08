@@ -54,7 +54,7 @@ class UserController {
                 email: newUser.email,
             })
         } catch (error) {
-            console.log(error, `<----------------`);
+            // console.log(error, `<----------------`);
             
             next(error)
         }
@@ -156,13 +156,15 @@ class UserController {
                 html
             };
 
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  console.error("Error sending email: ", error);
-                } else {
-                  console.log("Email sent: ", info.response);
-                }
-            });
+            if(created) {
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.error("Error sending email: ", error);
+                    } else {
+                      console.log("Email sent: ", info.response);
+                    }
+                });
+            }
 
             const access_token = signToken({id: user.id});
 

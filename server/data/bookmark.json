@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "UserId": 1,
+        "ArticleId": "d876adab116e8d63984b12b7538e8921"
+    },
+    {
+        "id": 2,
+        "UserId": 2,
+        "ArticleId": "d876adab116e8d63984b12b7538e8921"
+    },
+    {
+        "id": 3,
+        "UserId": 1,
+        "ArticleId": "c5ec86db2a7071f434a79af0564cdf4d"
+    },
+    {
+        "id": 4,
+        "UserId": 2,
+        "ArticleId": "c5ec86db2a7071f434a79af0564cdf4d"
+    },
+    {
+        "id": 5,
+        "UserId": 1,
+        "ArticleId": "dc2cb2263805e06c003a6724feec29e0"
+    },
+    {
+        "id": 6,
+        "UserId": 2,
+        "ArticleId": "dc2cb2263805e06c003a6724feec29e0"
+    }
+]

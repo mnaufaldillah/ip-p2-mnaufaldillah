@@ -19,7 +19,7 @@ function CardArticleDetail({dataDetail, userBookmark}) {
         for (const item of userBookmark) {
             if(item.ArticleId === dataDetail.articleId) {
                 return (
-                    <button onClick={handlerDeleteBookmark}  className="btn btn-outline-danger btn-sm" key={dataDetail.articleId}>
+                    <button onClick={handlerDeleteBookmark}  className="btn btn-outline-danger btn-lg" key={dataDetail.articleId}>
                         Delete Bookmark
                     </button>
                 )
@@ -27,7 +27,7 @@ function CardArticleDetail({dataDetail, userBookmark}) {
         }
 
         return (
-            <button onClick={handlerAddBookmark} className="btn btn-primary btn-sm">
+            <button onClick={handlerAddBookmark} className="btn btn-primary btn-lg">
                 Bookmark This
             </button>
         )

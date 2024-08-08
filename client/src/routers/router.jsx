@@ -6,6 +6,7 @@ import Register from '../pages/Register';
 import ArticleList from '../pages/ArticleList';
 import ArticleDetail from '../pages/ArticleDetail';
 import UploadImage from '../pages/UploadImage';
+import BookmarkList from '../pages/BookmarkList';
 
 const router = createBrowserRouter([
     {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         loader: () => {
             if(!localStorage.access_token) {
-                return redirect(`/`);
+                return redirect(`/login`);
             }
 
             return null;
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: 'user-upload',
                 element: <UploadImage />
+            },
+            {
+                path: `bookmark`,
+                element: <BookmarkList />
             }
         ]
     }
