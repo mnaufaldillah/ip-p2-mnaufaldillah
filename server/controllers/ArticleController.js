@@ -9,7 +9,7 @@ class ArticleController {
                 method: `GET`,
                 params: {
                     apikey: process.env.NEWSDATA_IO_API_KEY,
-                    language: `id`,
+                    language: `en`,
                     category: `sports`,
                     timezone: `Asia/Jakarta`
                 }
@@ -24,14 +24,16 @@ class ArticleController {
     static async getArticleSummaryById(req, res, next) {
         try {
             const { articleId } = req.params;
+
+            // console.log(typeof articleId, `<-------- Article Id Type`, articleId, `<----------- Article ID get`);
+            
             
             const { data } = await newsDataInstance({
                 url: `/latest`,
                 method: `GET`,
                 params: {
                     apikey: process.env.NEWSDATA_IO_API_KEY,
-                    id: `${articleId}`,
-                    timezone: `Asia/Jakarta`
+                    id: `${articleId}`
                 }
             });
 

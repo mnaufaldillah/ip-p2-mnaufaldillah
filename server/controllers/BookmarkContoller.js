@@ -43,8 +43,7 @@ class BookmarkController {
                 method: `GET`,
                 params: {
                     apikey: process.env.NEWSDATA_IO_API_KEY,
-                    id: `${arrBookmarks}`,
-                    timezone: `Asia/Jakarta`
+                    id: `${arrBookmarks}`
                 }
             });
 

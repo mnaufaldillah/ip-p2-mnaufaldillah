@@ -11,7 +11,7 @@ function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-                <Link to='/article' className="navbar-brand">
+                <Link to='/' className="navbar-brand">
                     Wide World of Football News
                 </Link>
                 <button
@@ -28,7 +28,7 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to='/article' className="nav-link">
+                            <Link to='/' className="nav-link">
                                 Article
                             </Link>
                         </li>
