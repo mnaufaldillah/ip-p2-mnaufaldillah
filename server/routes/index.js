@@ -7,11 +7,17 @@ const routerArticle = require(`./articles.js`);
 const routerBookmark = require(`./bookmarks.js`);
 const routerComment = require(`./comments.js`);
 
+const multer = require(`multer`);
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage});
+
 router.post(`/add-user`, UserController.registerUser);
 router.post(`/login`, UserController.loginUser);
 router.post(`/google-login`, UserController.googleLoginUser);
 
 router.use(authentication);
+
+router.patch(`/user-upload`, upload.single(`image`), UserController.uploadImageUser)
 
 // router.use(`/articles`)
 router.use(`/matches`, routerMatch);

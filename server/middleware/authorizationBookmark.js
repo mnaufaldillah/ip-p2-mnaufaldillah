@@ -2,8 +2,13 @@ const { Bookmark } = require(`../models/index.js`);
 
 async function authorizationBookmark(req, res, next ) {
     try {
-        const { bookmarkId } = req.params;
-        const bookmark = await Bookmark.findByPk(bookmarkId);
+        const { ArticleId } = req.params;
+        const bookmark = await Bookmark.findOne({
+            where: {
+                UserId: req.user,
+                ArticleId
+            }
+        });
 
         if(!bookmark) {
             throw { name: `NotFound`}

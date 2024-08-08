@@ -53,13 +53,31 @@ class BookmarkController {
         }
     }
 
+    static async getBookmarksForUser(req, res, next) {
+        try {
+            const Bookmarks = await Bookmark.findAll({
+                where: {
+                    UserId: req.user
+                }
+            });
+
+            res.status(200).json(Bookmarks);
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async deleteBookmark(req, res, next) {
         try {
-            const { bookmarkId} = req.params;
+            const { ArticleId } = req.params;
+
+            // console.log(ArticleId, `<-------------`, typeof ArticleId, `<----------------------`);
+            
 
             await Bookmark.destroy({
                 where: {
-                    id: bookmarkId
+                    UserId: req.user,
+                    ArticleId
                 }
             });
 

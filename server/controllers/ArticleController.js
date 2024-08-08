@@ -46,6 +46,7 @@ class ArticleController {
             const summaryText = await summaryGemini(articleLink);
 
             res.status(200).json({
+                articleId,
                 articleTitle,
                 articleImageUrl,
                 articleDescription,

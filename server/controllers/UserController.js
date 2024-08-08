@@ -3,6 +3,7 @@ const { User } = require(`../models/index.js`);
 const { signToken } = require(`../helpers/jwt.js`);
 const { OAuth2Client } = require(`google-auth-library`);
 const { where } = require("sequelize");
+const cloudinary = require(`cloudinary`).v2;
 
 class UserController {
     static async registerUser(req, res, next) {
@@ -55,7 +56,11 @@ class UserController {
 
             const access_token = signToken({id: foundUser.id});
 
-            res.status(200).json({access_token});
+            res.status(200).json({
+                access_token,
+                fullName: foundUser.fullName,
+                imageurl: foundUser.imageUrl
+            });
         } catch (error) {
             next(error)
         }
@@ -96,8 +101,47 @@ class UserController {
 
             const access_token = signToken({id: user.id});
 
-            res.status(200).json({access_token});
+            res.status(200).json({
+                access_token,
+                fullName: user.fullName,
+                imageUrl: user.imageUrl
+            });
         } catch (error) {
+            next(error)
+        }
+    }
+
+    static async uploadImageUser(req, res, next) {
+        try {
+            cloudinary.config({
+                cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+                api_key: process.env.CLOUDINARY_API_KEY,
+                api_secret: process.env.CLOUDINARY_API_SECRET
+            });
+
+            const b64file = Buffer.from(req.file.buffer).toString(`base64`);
+
+            const dataURI = `data:${req.file.mimetype};base64,${b64file}`
+
+            const uploadFile = await cloudinary.uploader.upload(dataURI, {
+                folder: `individual-project-p2`,
+                public_id: req.file.originalname
+            });
+
+             const editedUser = await User.update({
+                imageUrl: uploadFile.secure_url
+            }, {
+                where: {
+                    id: req.user
+                }
+            });
+
+            const uploadedImage = editedUser.imageUrl
+
+            res.status(200).json({ message: `User Image success to update`, uploadedImage })
+        } catch (error) {
+            console.log(error);
+            
             next(error)
         }
     }

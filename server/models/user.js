@@ -68,6 +68,9 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Minimum Password Length is 4`
         }
       }
+    },
+    imageUrl: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,
@@ -76,6 +79,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.beforeCreate((instance) => {
     instance.password = hashPassword(instance.password);
+    instance.imageUrl = '';
   })
   return User;
 };

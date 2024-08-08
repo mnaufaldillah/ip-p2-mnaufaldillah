@@ -19,6 +19,7 @@ module.exports = {
     data = data.map((item) => {
       delete item.id;
       item.password = hashPassword(item.password);
+      item.imageUrl = '';
       item.createdAt = new Date();
       item.updatedAt = new Date();
       return item;
