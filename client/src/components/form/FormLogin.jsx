@@ -83,7 +83,7 @@ function FormLogin() {
 
             localStorage.setItem(`access_token`, data.access_token);
             localStorage.setItem(`imageUrl`, data.imageUrl);
-            localStorage.setItem(`access_token`, data.access_token);
+            localStorage.setItem(`fullName`, data.fullName);
 
             navigate(`/`);
         } catch (error) {
