@@ -195,9 +195,9 @@ FN:103,(anonymous_3)
 FN:160,(anonymous_4)
 FN:181,(anonymous_5)
 FNF:6
-FNH:4
+FNH:3
 FNDA:4,(anonymous_0)
-FNDA:1,(anonymous_1)
+FNDA:0,(anonymous_1)
 FNDA:5,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
@@ -216,8 +216,8 @@ DA:20,1
 DA:25,1
 DA:36,1
 DA:43,1
-DA:44,1
-DA:45,1
+DA:44,0
+DA:45,0
 DA:47,0
 DA:51,1
 DA:59,3
@@ -270,8 +270,8 @@ DA:211,1
 DA:213,1
 DA:218,2
 LF:67
-LH:44
-BRDA:44,0,0,1
+LH:42
+BRDA:44,0,0,0
 BRDA:44,0,1,0
 BRDA:67,1,0,1
 BRDA:67,1,1,4
@@ -290,7 +290,7 @@ BRDA:159,7,1,0
 BRDA:161,8,0,0
 BRDA:161,8,1,0
 BRF:18
-BRH:9
+BRH:8
 end_of_record
 TN:
 SF:helpers\bcrypt.js
